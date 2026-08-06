@@ -18,7 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # فحص وتعيين مسار Dockerfile للـ Backend سواء كان كبير أو صغير
       - name: Detect Backend Dockerfile
         id: backend_file
         run: |
@@ -26,16 +25,6 @@ jobs:
             echo "path=./backend/Dockerfile" >> $GITHUB_OUTPUT
           elif [ -f "./backend/dockerfile" ]; then
             echo "path=./backend/dockerfile" >> $GITHUB_OUTPUT
-          fi
-
-      # فحص وتعيين مسار Dockerfile للـ Frontend سواء كان كبير أو صغير
-      - name: Detect Frontend Dockerfile
-        id: frontend_file
-        run: |
-          if [ -f "./frontend/Dockerfile" ]; then
-            echo "path=./frontend/Dockerfile" >> $GITHUB_OUTPUT
-          elif [ -f "./frontend/dockerfile" ]; then
-            echo "path=./frontend/dockerfile" >> $GITHUB_OUTPUT
           fi
 
       - name: Set up Docker Buildx
@@ -57,13 +46,3 @@ jobs:
           tags: |
             ghcr.io/ezaldeen200/app-backend:latest
             ghcr.io/ezaldeen200/app-backend:${{ github.sha }}
-
-      - name: Build and push frontend image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./frontend
-          file: ${{ steps.frontend_file.outputs.path }}
-          push: true
-          tags: |
-            ghcr.io/ezaldeen200/app-frontend:latest
-            ghcr.io/ezaldeen200/app-frontend:${{ github.sha }}
