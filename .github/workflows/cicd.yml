@@ -31,7 +31,7 @@ jobs:
       - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./backend
           file: ./backend/Dockerfile
           push: true
           tags: |
@@ -41,17 +41,9 @@ jobs:
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./frontend
           file: ./frontend/Dockerfile
           push: true
           tags: |
             ghcr.io/ezaldeen200/app-frontend:latest
             ghcr.io/ezaldeen200/app-frontend:${{ github.sha }}
-      - name: Check files and paths
-        run: |
-          echo "=== Root Directory Content ==="
-          ls -la
-          echo "=== Backend Directory Content ==="
-          ls -la backend/ || true
-          echo "=== Frontend Directory Content ==="
-          ls -la frontend/ || true
