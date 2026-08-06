@@ -46,3 +46,10 @@ jobs:
           tags: |
             ghcr.io/ezaldeen200/app-backend:latest
             ghcr.io/ezaldeen200/app-backend:${{ github.sha }}
+
+      - name: Restart Services with Docker Compose
+        run: |
+          cd ~/Desktop/Project2/Expense_Tracker
+          docker compose down
+          docker compose pull
+          docker compose up -d
