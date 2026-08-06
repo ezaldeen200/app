@@ -32,7 +32,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend
-          file: ./backend/Dockerfile
           push: true
           tags: |
             ghcr.io/ezaldeen200/app-backend:latest
@@ -42,7 +41,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
-          file: ./frontend/Dockerfile
           push: true
           tags: |
             ghcr.io/ezaldeen200/app-frontend:latest
