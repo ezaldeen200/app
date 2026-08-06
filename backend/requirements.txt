@@ -1,0 +1,6 @@
+flask
+gunicorn
+hvac
+psycopg2-binary
+python-dotenv
+alembic
