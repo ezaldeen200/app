@@ -47,3 +47,11 @@ jobs:
           tags: |
             ghcr.io/ezaldeen200/app-frontend:latest
             ghcr.io/ezaldeen200/app-frontend:${{ github.sha }}
+      - name: Check files and paths
+        run: |
+          echo "=== Root Directory Content ==="
+          ls -la
+          echo "=== Backend Directory Content ==="
+          ls -la backend/ || true
+          echo "=== Frontend Directory Content ==="
+          ls -la frontend/ || true
